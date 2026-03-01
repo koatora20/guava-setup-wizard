@@ -55,13 +55,24 @@ if ! command -v go &> /dev/null; then
 fi
 
 # Set up OpenClaw Workspace structure
-echo "🍈 Setting up Guava/OpenClaw Workspace structure..."
+echo "🍈 [6/7] Setting up Guava/OpenClaw Workspace structure..."
 mkdir -p ~/.openclaw/workspace/projects
 mkdir -p ~/.openclaw/workspace/skills
 mkdir -p ~/.openclaw/workspace/memory/notes
 mkdir -p ~/.openclaw/workspace/memory/episodes
 
+# Install OpenClaw CLI and Cloudflared (Security)
+echo "🤖 [7/7] Installing OpenClaw CLI & Security Firewall..."
+sudo npm install -g @openclaw/cli@latest
+curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+sudo dpkg -i cloudflared.deb || true
+rm cloudflared.deb
+
 echo "--------------------------------------------------------"
 echo "✅ Setup Complete! Your VPS is now a Guava-powered AI Agent Hub."
+echo ""
+echo "🚀 To start your AI Agent:"
+echo "    npx @openclaw/cli start --host 127.0.0.1"
+echo ""
 echo "Please log out and log back in for group changes (like Docker) to take effect."
-echo "Check out the note.com/guava_agi to get your first AI Agent Skills!"
+echo "Check out https://note.com/guava_agi to get your first AI Agent Skills!"
